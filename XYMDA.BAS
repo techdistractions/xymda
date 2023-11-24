@@ -1,3 +1,16 @@
+'xyWords Text-Mode Edition (xyMDA)
+'1st December 2023 - 4am Programming (4am.org/xywords)
+'Targets: 8088 @ 4.77mhz, 256KB RAM, 160KB FDD, MDA Text-Mode, PC-Speaker, DOS 2.11+
+
+'License details:
+'This source code is released as public domain
+'GRAPHICS.DAT contains ASCII art that requires attribution from the author
+
+'Edit this in Quickbasic 4.5 and ensure XYMDA.BAS is loaded first
+'Then use File > Load File and load XYMDA_2.BAS
+'You will need to CHDIR to the directory where the data files are stored
+'Or you will get a XYPUZ.DAT error
+
 DECLARE SUB ViewHelp ()
 DECLARE SUB KillPlayer ()
 DECLARE SUB MMenu ()
@@ -46,9 +59,6 @@ DECLARE FUNCTION BorderConnect! (YPos%, XPos%, SegFlag%)
 DECLARE SUB ShowWord (WordStr$, WordType%, WordOrient%, WordX%, WordY%, MaskFlag%)
 DECLARE SUB xyBannerDraw (uRow%, uCol%)
 DECLARE SUB ScreenBorderDraw ()
-
-'xyWords Text-Mode Edition (xyMDA)
-'Targets: 8088 @ 4.77mhz, 256KB RAM, 160KB FDD, MDA Text-Mode, PC-Speaker, DOS 2.11+
 
 'Variables (Non-Array)
 COMMON SHARED LastErr%, FPCount%, CollCount%, PuzCount%, FocusPuzCount%, CollSelect%, PuzSelect%, FocusCollCount%, pMDASettings$, FocusPlayer%
@@ -575,7 +585,7 @@ Player.EditSubMenu: 'Handle all of the Edit/Show items here
 
 Buffer$ = SplitWords$(2) 'Clear buffer
 
-Player.EditBuf:                          
+Player.EditBuf:                         
 LOCATE 15, 22: COLOR 0, 7: PRINT Buffer$; STRING$(10 - LEN(Buffer$), " "); : COLOR 7, 0
 
 Player.EditKey:
