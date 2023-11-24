@@ -1,0 +1,97 @@
+xyWords v1.0.0 - 2023 4am Programming (4am.org/xywords)
+
+--> Press F2 for full readme including credits information <--
+
+Aims of the game
+----------------
+Use the letter wheel to guess words on the board.
+Clear the puzzle by finding all of the words.
+All words will be anagrams or part-anagrams of the wheel.
+Words must be between 3 and 7 letters in length.
+
+See example below:
+FIYSH = Jumbled letters of the keyword "FISHY"
+A valid guess would be "FISH" 
+An invalid guess would be "HISS" (as there's only one S in FISHY)
+
+Avoid wrong guesses (invalid words, or duplicate entries).
+Look for hidden words to put in the word bag for a bonus.
+Some puzzles have time or (wrong) guess limits!
+
+ษอออออออออออออออออหอออออออออออออออออออออออออออออออออป
+บ                 บ Free Play!                      บ
+บ                 บ                                 บ
+บ                 บ Puzzle: (#1) FREE-1             บ
+บ                 บ Difficulty: 1 - Easy            บ
+บ  (Puzzle        บ Time Elapsed: 0:01              บ
+บ     Board)      บ Invalid Attempts: 0             บ
+บ        ฺฤฟ ฺฤฟ  บ Board Words: 0 of 5             บ
+บ        ณณ ณณ  บ No Bag Words                    บ
+บ        รฤด รฤด  บ                 (Status Area)   บ
+บ        ณณ ณณ  ศอออออออออออออออหอออออออออออออออออน
+บ    ฺฤยฤลฤลฤลฤด                  บ Key Help        บ
+บ    ณณณณณณ     (Letter      บ                 บ
+บ    รฤลฤมฤลฤลฤู      Wheel)      ฬอออออออออออออออออน
+บ    ณณ   ณณ           ÜÜÜ      บ Player1         บ
+บ    รฤด   รฤด         ฿  I  ฿    บ                 บ
+บ    ณณ   ณณ        ฒ F   Y ฒ   บ <-- Backspace   บ
+บ    รฤด   ภฤู         Ü S H Ü    บ <ู Submit Word  บ
+บ    ณณ                 ฿฿฿      บ ^ Shuffle       บ
+บ    ภฤู                          บ                 บ
+บ                    (Rack)       บ <> Rotate       บ
+บ                    ฺฤยฤยฤยฤยฤฟ  บ SPACE Select    บ
+บ                    ณ ณ ณ ณ ณ ณ  บ F4 Mute Sound   บ
+บ                    ภฤมฤมฤมฤมฤู  บ ESC Quit!       บ
+ศอออออออออออออออออออออออออออออออออสอออออออออออออออออผ
+
+Playing the game
+-----------------
+When you start the game a puzzle board will appear.
+The Key Word will be jumbled and stored in the 
+letter wheel on the right.
+
+You can use the keyboard to type these letters and they
+will appear in the word rack below.
+
+Use backspace to clear a letter. 
+Use UP arrow to shuffle the letters in the wheel.
+Use the exact letters (and counts of) in your guesses.
+
+If you're using an emulator or handheld PC you can use
+arrow keys to rotate the letter wheel and press space
+to choose the letter at the top of the wheel. 
+
+Each word tile will be masked with a  diamond.
+As you guess the correct words they will un-mask.
+
+Word Types
+----------
+KWord - Key Word, 1 per puzzle.
+PWord - Puzzle Word - sits alone, more difficult to guess. 
+PWords are not in all puzzles..
+XWord - Cross Word - intersects with other XWords or the KWord.
+OWord - Off-board word hidden and a bonus.
+You do not need to find OWords to clear a puzzle.
+
+Progress, Records & Stats
+-------------------------
+There are two game modes in xyWords:
+
+1) Free Play
+This is a group of puzzles you can freely attempt at any time.
+The first time you complete one, the time you took to find
+the keyword is recorded and cannot be updated.
+
+But all of the other records and statistics can be updated as 
+you replay the puzzle. 
+
+2) Collection Play
+These are curated lists of puzzles which you must play in order.
+Out of the box - xyWords ships with 3 collections.
+
+As you complete puzzles, the next one unlocks.
+You can replay completed puzzles at any time.
+
+Note: Records are kept per puzzle, so if a puzzle appears 
+in more than one collection - the record will appear the same.
+
