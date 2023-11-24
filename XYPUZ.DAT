@@ -1,9 +1,11 @@
 :XYPUZ.DAT Example file
 :Please refer to README.TXT for more information on how to edit this file
 :DO NOT PUT COMMENTS OR BLANK LINES BETWEEN SECTIONS [] [/] {} {/}
+:NOTE - for xyMDA the following is not implemented: OverlaySettings$, MessageText$, Icon$, ImageRef, Pattern
 
 :Freeplay is a list of puzzles that are unlocked and ready to play
 :Referenced puzzles must exist in the [PUZZLES] sections of this file
+:These can also be part of a collection elsewhere with overlay settings (not xyMDA)
 
 [FREEPLAY]
 FREE-1
@@ -20,6 +22,21 @@ FREE-8
 :Referenced puzzles must exist in the [PUZZLES] sections of this file
 :Use $ to reference an internal asset for a collection icon
 :otherwise a valid file name is expected for a 16x16 bsave format image
+
+:Collection header: {CollectionName$|CollectionAuthor$|Icon$}
+:CollectionName$ - The friendly name of the collection, shown in-game.
+:CollectionAuthor$ - Author details. Default collections should be left as xyWords.
+:Icon$ - Reference or symbol for the collection (not xyMDA)
+
+:Each sequenced puzzle: PuzzleReference$|OverlaySettings$|MessageText$
+
+:PuzzleReference$ - The corresponding NAME in [PUZZLE] section
+:OverlaySettings$ - Settings that override those within the [PUZZLE] (not xyMDA)
+:7 bytes fixed AAABBBC; AAA - Invalid Word Count (000 None, 001-998 Value)
+:BBB - Puzzle TIme Limit (000 None, 001-998 Value)
+:C - Progress Count Flag (0 No, 1 Yes) - Also sets lock puzzles except first puzzle.
+:MessageText$ - 4x18 byte message seperated by [ - shown before a collection puzzle starts
+
 [COLLECTIONS]
 
 {Welcome|xyWords|}
@@ -73,7 +90,43 @@ FREE-2|0000001|
 :Use # to reference an internal pattern asset
 :otherwise a valid file name is expected
 :First line should be a puzzle count (which gets checked later)
-:{NAME|Diff|ImageRef|TimeTarget|InvalidLimit|Pattern|CountKX|CountPuz|CountBag|CountCom|CountUnC
+
+:LINE 1; {NAME|Diff|ImageRef|TimeTarget|InvalidLimit|Pattern|CountKX|CountPuz|CountBag|CountCom|CountUnC}
+:NAME - Used to show ID of puzzle and reference used in COLLECTION
+:Diff - Difficulty 01 - 99 depending how difficult the puzzle is. User Defined.
+:ImageRef - Image set used for backgrounds (not xyMDA)
+:TimeTarget - N for None, 001-999 for a time target to be enabled. 
+:InvalidLimit - N for None, 001-999 for an invalid try limit to be enabled.
+:Pattern - Use a pattern instead of background image - N for none, FileName otherwise (not xyMDA)
+:CountKX - Amount of board words (K and X type)
+:CountPuz - Amount of isolated puzzle words (P type)
+:CountBag - Amount of off-board bag words (O type)
+:CountCom - Amount of words validated as "common" (CW37.txt in xyWords CGA 1.0)
+:CountUncom - Amount of words validated as "uncommon" (CW37.txt in xyWords CGA 1.0)
+
+:LINE 2, 3 - Not used in xyMDA
+
+:LINE 4 - xyMDA Settings (14 bytes for settings, 15+ for pMDADecor$
+:pMDABorderFG% - (1) 2byte 00-15 - Playfield border foreground color (default = 07)
+:pMDABorderBG% - (2) 2byte 00-15 - Playfield border background color (default = 00)
+:pMDAPuzFG%	- (3) 2byte 00-15 - Puzzle background color (default = 00)
+:pMDAPuzBG%	- (4) 2byte 00-15 - Puzzle foreground color (default = 07)
+:pMDAUsePattern%	- (5) 2byte 00-03 - Use Pattern? (default no = 00,custom* = 01, graphics.dat* = 02 )
+:pMDAPatternFG%	- (6) 2byte 00-15 - Pattern foreground color (default = 00)
+:pMDAPatternBG%  - (7) 2byte 00-15 - Pattern background color (default = 07)
+:*pMDADecor$ - (8) variable $  - Define the custom pattern string, or background name in graphics.dat
+
+:LINE 5+ Word|X,Y|123 - Maximum lines/words = 99
+:Word - A valid word as per TWL06 (3-7 letters), part-anagram or anagram of the keyword
+:X - Column Position of the word start
+:Y - Row Position of the word start
+:1 - Word Type; K - Keyword (mandatory)
+:	X - Cross Word intersecting with K or X words
+:	P - Puzzle Word not intersecting any word
+:	O - Bag Word (X,Y = 0)
+:2 - Orientation Flag; V - Vertical, H - Horizontal (not used for O words)
+:3 - Commonality Flag; C - Common, U - Uncommon (as per CW37.txt)
+
 [PUZZLES]
 #37
 {FREE-1|01|M10_2|N|N|N|5|0|0|4|1}
