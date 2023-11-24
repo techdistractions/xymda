@@ -27,6 +27,113 @@ Generated during game run
 [PLAYER.DAT] - Player profiles, records and statistics.
 [XYSTATS.TXT] - Player Stats Report
 
+Future TODO
+-----------
+Implement collection overrides including pre-game message
+Word Bag: Test multiple pages
+ViewStats: -Optimise the report generation to use less code
+ViewStats: -Only count puzzles that have bag words
+BrowsePlayer: Support More than 9 player profiles
+TraceMode% and OutLog to capture events during the game
+Consider updating CW37 to v2 and including more words as common (5k?)
+GAME.DAT implementation for settings
+ViewHelp: Implement "Jumps" to lines based on a small menu eventually stored in GAME.DAT
 
+Variables
+---------
+SplitWords$() 		'Keeps the last StrSplit string available. Use ERASE to free memory.
+TextHold$() 		'Used by GetScreen and PutScreen to copy/paste text from the screen (no formatting).
+FPCount% 			'Count of Free Play Puzzles available
+FPList$() 			'Array for Free play puzzle names 1-FPCount%
+FPMap%()			'Array to map Free play puzzles to PuzHead/Data(X) 
+CollCount% 			'Count of Collections
+CollHead$() 		'Array for Collection headers 1-ColCount%
+CollData$()			'Array for Collection related data (puzzle count,unlock status)
+FocusColl$()		'Array for the currently 'loaded' Collection
+FocusCollCount%		'How many puzzles are in the collection
+FocusCollPuz%		'Currently focussed puzzle sequence within FocusColl$()
+PuzCount%			'Count of Puzzles
+PuzHead$()			'Array for Puzzle headers 1-PuzCount%
+PuzData$()			'Array for Puzzle related data (Keyword+XWords, PWords, OWords, Common, Uncommon)
+FocusPuz$()			'Array for currently 'loaded' puzzle
+FocusPuzWL$()		'Array for try lookup for words
+FocusPuzF%()		'Array for try lookup for word found flag
+FocusPuzCount%		'How many items are in FocusPuz$()
+CollSelect%			'Selected Collection (0 for freeplay)
+PuzSelect%			'Selected Puzzle (freeplay or collection)
+PlayerHead$()		'Array for Player Profile headers - Use (0) for Count
+FocusPlayer%		'Current # of the player relating to PlayerHead$()
+FocusPlayerProg$()	'Progress for each of the collections - Use (0) for Count
+FocusPlayerStat$()	'Statistics for each of the puzzles - Use (0) for Count
+Art$()				'Contains the loaded art/graphic ready for DrawArt routine
+SUICol%				'Column used to align starting position of all StatusUI components
+DoType%()			'Type of word; -1 OWord, 0 PWord, 1 XWord, 2KWord
+DoOrient%()			'Orientation; 0 Vertical, 1 Horizontal
+UseX%()				'X Position where the Word starts
+UseY%()				'Y Position where the Word starts
+DoCommon%()			'Word Commonality; 0 Common, 1 Uncommon
+PlayList$()			'1=KWord, 2=OWord, 3=PWord, 4=XWord, 5=Not Found, 6=Duplicate 7=Siren/Time, 8=Puzzle Complete
+UIList$() 			'Last called UIList$()
+PlayerCulmStat&		'Culmulative Stats; 1) Time, 2) Word, 3) Completion, 4)Invalid Word
+StatsArray&(X,Y)	'Array for records and stats X = Stat, Y = Player
+CWCol%				'Column for the TextUI							
+PuzKeyWord$			'Focus Puz Keyword
+PuzWheel$			'Current Wheel 
+PuzBuffer$			'Current Try buffer
+PuzTimeTotal%		'0 = No time limit, otherwise time limit in seconds
+PuzTimeCount%		'Default counter for the game (Time Elapsed) #stats
+PuzInvTotal%		'0 = No invalid word limit, otherwise invalid word limit 
+PuzInvCount%		'Counter for invalid words #stats
+PuzBagWordsTotal%	'0 = No bag words, otherwise count of bag words
+PuzBagWordsCount%	'Counter for bag words found #stats
+PuzBoardWordsTotal% 'Count of board words (needed to complete puzzle)
+PuzBoardWordsCount%	'Count of board words found
+PuzKeyWordTime%		'How long it took to find the keyword #stat (no overwrite?)
+PuzUWordCount%		'Uncommon words found
+PuzCWordCount%		'Common words found
+HelpUIView%			'0 for Key help, 1 for word bag view
+HelpUIPage%			'Current page if bag view is on
+HelpUIPages%		'Amount of pages in Word bag
+
+Temporary Variables for Swap Use
+Temp$, inText$, vSelect%
+
+--------------
+Functions/Subs
+--------------
+
+StrSplit$			'Returns nested values within a string. Use SplitWords$(1-Count) to analyse other values within the last split.
+GetMem$				'Returns QB memory string
+JumbleString$		'Returns a jumbled string based on the input
+BorderConnect!		'Returns the calculated border ascii code to use for the specificed xy		
+DatInit				'Uses the loaded file handle to intialise XYPUZ.DAT. Use Progress to print output as it loads.
+GetScreen			'GET statement for Text on the screen (YbyX)
+PutScreen			'PUT statement for Text on the screen (YbyX)
+ClearLine			'Erases x coords on the specified line
+DrawLine			'Draws a line of LineChar% 
+DrawBox				'Draws a box of BoxStyle% 
+UIBorderDraw		'(future redundant) Draws a custom DrawBox for gameplay UI 
+ShowWord			'Puts the basic border, mask/char on the appropriate are of the table
+UpdateBorder		'Uses the context given to update border corners and joiners 
+xyBannerDraw		'(future redundant) Draws xyWords banner art
+DecorateTable		'Paint background with String (use instead of DrawArt)
+PlayerInit			'Enumerate PlayerCount% and PlayerHead$()
+SelectPlayer		'FocusPlayer%, FocusPlayerProg$() and FocusPlayerStat$()
+LoadArt				'Loads Header$ entry in from GRAPHICS.DAT (use instead of DecorateTable)
+DrawArt 			'Draws contents of Art$() 
+BrowsePlayer%		'Lets you select an existing player, create a new one, view statistics or edit an existing player
+intUP%				'Quick formula for dividing 2 numbers and rounding up to nearest whole number
+GetDifficulty
+GetKey$  'Waits for a key and returns a string value 
+GetMem$  'Returns free memory statistics as a string
+GetUnlock
+LoadPuzzle
+LoadColl
+ShowPuzzle
+LetterWheel			'Paint the wheel (needs optimisation for repaint later)
+SubmitTry%			'Return 0 for accepted, 1 for invalid
+UpdateSUI			'Section%,uVal%,uStr$ Section=0 Init, 1 Timer, 2 Invalid Word, 3 Board Words, 4 Bag Words
+TimeString$
+PuzRecordChange$ = TWIB 4 byte value Time, WPM, Invalid, Bag
 
 
