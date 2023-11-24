@@ -1,0 +1,32 @@
+xyWords: Text-Mode Edition (xyMDA) Development Notes
+
+Editing/Compiling Requirements
+------------------------------
+Quickbasic 4.5 (run QB.EXE with no parameters)
+Do not use QB64, Qbasic or anything else.
+Load XYMDA.BAS first then use the "Load File" menu to Load XYMDA_2.BAS
+Both files are "linked" when compiling
+If you run this within the QB4.5 IDE ensure you CHDIR to the folder where the source is.
+Otherwise you'll get an error XYPUZ.DAT can't be found.
+
+Target end-user environment (binary)
+------------------------------------
+8088 @ 4.77mhz, 256KB RAM, 360KB Floppy, Monochrome (MDA) Display Mode, MS-DOS 2.11+ and PC Speaker.
+
+File Manifest
+-------------
+[GRAPHICS.DAT] - Contains all of the ASCII graphics xyWords will reference
+[XYPUZ.DAT] - Contains puzzle word lists, settings and collection information
+[README.TXT] - Full README documentation / in-game manual
+[QHELP.TXT] - Short version documentation for quick help and info / in-game viewable
+[XYMDA.BAS] - Linked source code file #1
+[XYMDA_2.BAS] - Linked source code file #2
+
+Generated during game run
+-------------------------
+[PLAYER.DAT] - Player profiles, records and statistics.
+[XYSTATS.TXT] - Player Stats Report
+
+
+
+
